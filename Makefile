@@ -9,11 +9,12 @@ DISTFILES=	libchromiumcontent.zip libchromiumcontent-static.zip
 
 MAINTAINER=	ygy@FreeBSD.org
 
-EXTRACT_DEPENDS=${LOCALBASE}/bin/unzip:archivers/unzip
-BUILD_DEPENDS=  python:lang/python \
-                node:www/node \
-                npm:www/npm \
-		libnotify>0:devel/libnotify
+#EXTRACT_DEPENDS=${LOCALBASE}/bin/unzip:archivers/unzip
+BUILD_DEPENDS=	python:lang/python \
+	node:www/node \
+	npm:www/npm \
+	libnotify>0:devel/libnotify
+
 LIB_DEPENDS=	libdbus-1.so:devel/dbus \
 		libFLAC.so:audio/flac \
 		libplds4.so:devel/nspr \
@@ -34,7 +35,7 @@ LIB_DEPENDS=	libdbus-1.so:devel/dbus \
 		libnssutil3.so:security/nss
 
 USES=		gettext-runtime jpeg
-USE_GNOME=      atk cairo gdkpixbuf2 gconf2 glib20 gtk30 libxslt pango
+USE_GNOME=	atk cairo gdkpixbuf2 gconf2 glib20 gtk30 libxslt pango
 USE_XORG=	xcb xcomposite xcursor xdamage xext xfixes xi xrandr xrender xtst xscrnsaver x11
 
 USE_GITHUB=	yes
