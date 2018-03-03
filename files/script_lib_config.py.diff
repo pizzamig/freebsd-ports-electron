@@ -1,0 +1,10 @@
+--- script/lib/config.py.orig	2018-03-03 13:06:56.792734000 +0100
++++ script/lib/config.py	2018-03-03 13:07:08.261354000 +0100
+@@ -19,6 +19,7 @@
+   'darwin': 'darwin',
+   'linux2': 'linux',
+   'freebsd11': 'freebsd',
++  'freebsd12': 'freebsd',
+   'win32': 'win32',
+ }[sys.platform]
+ 

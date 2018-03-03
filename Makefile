@@ -57,13 +57,15 @@ GH_TUPLE=	boto:boto:f7574aa:boto/vendor/boto \
 post-extract:
 	${MKDIR} ${WRKSRC}/vendor/download/libchromiumcontent
 	echo ${WRKSRC}
-	${UNZIP_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
+	${UNZIP_NATIVE_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
 		${DISTDIR}/${DIST_SUBDIR}/libchromiumcontent.zip
-	${UNZIP_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
+	${UNZIP_NATIVE_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
 		${DISTDIR}/${DIST_SUBDIR}/libchromiumcontent-static.zip
 
-pre-build:
+post-patch:
 	patch -p1 --ignore-whitespace -d ${WRKSRC} < electron_111.diff
+	patch -d ${WRKSRC} < ${FILESDIR}/script_bootstrap.py.diff
+	patch -d ${WRKSRC} < ${FILESDIR}/script_lib_config.py.diff
 	(cd ${WRKSRC} && script/bootstrap.py -v --clang_dir=/usr || true)
 	patch -p1 --ignore-whitespace -d ${WRKSRC}/vendor/native_mate/ < electron_vendor_native_matev1.diff
 	patch -p1 --ignore-whitespace -d ${WRKSRC}/brightray/ < electron_brightrayv3.diff
