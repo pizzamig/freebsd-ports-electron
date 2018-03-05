@@ -53,14 +53,12 @@ GH_TUPLE=	boto:boto:f7574aa:boto/vendor/boto \
 		requests:requests:e4d59be:requests/vendor/requests \
 		yzgyyang:grit:9536fb6:grit/vendor/pdf_viewer/vendor/grit
 
-post-extract:
+post-fetch:
 	${MKDIR} ${WRKSRC}/vendor/download/libchromiumcontent
 	${UNZIP_NATIVE_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
 		${DISTDIR}/${DIST_SUBDIR}/libchromiumcontent.zip
 	${UNZIP_NATIVE_CMD} -d ${WRKSRC}/vendor/download/libchromiumcontent/ \
 		${DISTDIR}/${DIST_SUBDIR}/libchromiumcontent-static.zip
-
-post-patch:
 	${PATCH} -p1 --ignore-whitespace -d ${WRKSRC} < ${FILESDIR}/electron_111.diff
 	${PATCH} -d ${WRKSRC} < ${FILESDIR}/script_bootstrap.py.diff
 	(cd ${WRKSRC} && script/bootstrap.py -v --clang_dir=/usr || true)
@@ -69,9 +67,9 @@ post-patch:
 	${PATCH} -p1 --ignore-whitespace -d ${WRKSRC}/vendor/libchromiumcontent/ < ${FILESDIR}/electron_vendor_libchromiumcontentv1.diff
 	${PATCH} -p1 --ignore-whitespace -d ${WRKSRC} < ${FILESDIR}/electron_libchromiumcontent_git.diff
 	${PATCH} -p1 --ignore-whitespace -d ${WRKSRC} < ${FILESDIR}/electron_pin_typescript_version.diff
+	(cd ${WRKSRC} && script/bootstrap.py -v --clang_dir=/usr)
 
 do-build:
-	(cd ${WRKSRC} && script/bootstrap.py -v --clang_dir=/usr)
 	(cd ${WRKSRC} && script/build.py -c R)
 	(cd ${WRKSRC} && script/create-dist.py)
 
