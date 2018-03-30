@@ -16,7 +16,8 @@ FETCH_DEPENDS= npm:www/npm
 BUILD_DEPENDS=	python:lang/python \
 		node:www/node \
 		npm:www/npm \
-		libnotify>0:devel/libnotify
+		libnotify>0:devel/libnotify \
+		pkg-config:devel/pkgconf
 
 LIB_DEPENDS=	libdbus-1.so:devel/dbus \
 		libFLAC.so:audio/flac \
