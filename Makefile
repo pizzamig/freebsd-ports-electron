@@ -11,6 +11,9 @@ MAINTAINER=	ygy@FreeBSD.org
 
 LICENSE=	MIT
 
+ONLY_FOR_ARCH=	amd64
+ONLY_FOR_ARCHS_REASON=	Electron is required to be built on a 64bit machine
+
 FETCH_DEPENDS= npm:www/npm
 
 BUILD_DEPENDS=	python:lang/python \
